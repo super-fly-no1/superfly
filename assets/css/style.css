@@ -1085,6 +1085,8 @@ strong { color: var(--primary); font-weight: 600; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+  max-width: 780px;
+  margin: 0 auto;
 }
 .member-card {
   position: relative;
@@ -1198,7 +1200,7 @@ strong { color: var(--primary); font-weight: 600; }
 /* ---------- 联系我们 ---------- */
 .contact-wrap {
   display: block;
-  max-width: 780px;
+  max-width: 860px;
   margin: 0 auto;
 }
 .contact-info {
