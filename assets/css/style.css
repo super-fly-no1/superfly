@@ -1329,3 +1329,12 @@ strong { color: var(--primary); font-weight: 600; }
   cursor: pointer;
 }
 .consent strong { color: var(--accent); font-weight: 600; }
+
+/* 未勾选同意时提交按钮置灰 */
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.btn[disabled]:hover { transform: none; }

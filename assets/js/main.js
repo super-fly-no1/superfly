@@ -257,4 +257,18 @@
       }
     });
   });
+
+  /* ---------- 9. 同意勾选才可提交 ---------- */
+  document.querySelectorAll("form .consent input[type='checkbox']").forEach(function (cb) {
+    var form = cb.closest("form");
+    var submitBtn = form ? form.querySelector("button[type='submit']") : null;
+    if (!submitBtn) return;
+
+    function updateSubmit() {
+      submitBtn.disabled = !cb.checked;
+    }
+    cb.addEventListener("change", updateSubmit);
+    form.addEventListener("reset", updateSubmit);
+    updateSubmit();
+  });
 })();
