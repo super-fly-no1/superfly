@@ -119,7 +119,37 @@
     }, 3200);
   }
 
-  /* ---------- 6. 表单处理（纯前端模拟，数据存 localStorage） ---------- */
+  /* ---------- 6. 云端同步（CloudBase 云开发） ---------- */
+  var CLOUDBASE_ENV = "fly-3d-d4geg6o440edaa00c";
+  var CLOUD_TYPE_MAP = { uvd_orders: "order", uvd_members: "member", uvd_messages: "message" };
+  var _cloudApp = null;
+
+  function getCloudApp() {
+    if (_cloudApp) return _cloudApp;
+    if (typeof cloudbase === "undefined") return null; // SDK 未加载时不报错
+    _cloudApp = cloudbase.init({ env: CLOUDBASE_ENV });
+    return _cloudApp;
+  }
+
+  // 将表单记录推送到云端；失败静默（本地 localStorage 兜底，数据不丢）
+  function pushToCloud(type, record) {
+    var app = getCloudApp();
+    if (!app) return Promise.resolve(false);
+    return app
+      .auth({ persistence: "local" })
+      .signInAnonymously()
+      .then(function () {
+        return app.callFunction({ name: "saveForm", data: { type: type, data: record } });
+      })
+      .then(function (res) {
+        return !!(res && res.result && res.result.ok);
+      })
+      .catch(function () {
+        return false;
+      });
+  }
+
+  /* ---------- 7. 表单处理（本地保存 + 云端同步） ---------- */
   function saveRecord(key, record) {
     try {
       var list = JSON.parse(localStorage.getItem(key) || "[]");
@@ -163,6 +193,13 @@
       }
       var record = collect();
       saveRecord(storageKey, record);
+      // 云端同步（异步，失败不影响本地）
+      var cloudType = CLOUD_TYPE_MAP[storageKey];
+      if (cloudType) {
+        pushToCloud(cloudType, record).then(function (ok) {
+          if (ok) showToast("已同步保存到云端 ✓");
+        });
+      }
       if (onSuccess) onSuccess(record, form);
       // 显示成功态，隐藏表单主体
       if (successBox) {
@@ -201,7 +238,7 @@
   // 在线留言
   bindForm("msgForm", "uvd_messages");
 
-  /* ---------- 7. 会员卡片「开通」按钮联动注册表单 ---------- */
+  /* ---------- 8. 会员卡片「开通」按钮联动注册表单 ---------- */
   var planButtons = document.querySelectorAll("[data-plan]");
   planButtons.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
