@@ -1299,3 +1299,12 @@ strong { color: var(--primary); font-weight: 600; }
   color: #ffd166;
 }
 .footer-status + .footer-note { margin-top: 14px; }
+
+/* ---------- 页脚 Logo（低调展示） ---------- */
+.footer-logo {
+  display: block;
+  max-width: 140px;
+  height: auto;
+  margin: 0 auto 16px;
+  opacity: 0.9;
+}
