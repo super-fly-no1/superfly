@@ -1308,3 +1308,24 @@ strong { color: var(--primary); font-weight: 600; }
   margin: 0 auto 16px;
   opacity: 0.9;
 }
+
+/* ---------- 表单隐私同意勾选 ---------- */
+.consent-field { margin-bottom: 16px; }
+.consent {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin-top: 4px;
+  accent-color: #22d3ee;
+  cursor: pointer;
+}
+.consent strong { color: var(--accent); font-weight: 600; }
