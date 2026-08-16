@@ -132,4 +132,19 @@
     form.addEventListener("reset", updateSubmit);
     updateSubmit();
   });
+  /* ---------- 7. 表单展开切换（点按钮展开内嵌表单，不跳转） ---------- */
+  document.querySelectorAll(".js-toggle-form").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var wrap = btn.nextElementSibling;
+      if (!wrap || !wrap.classList.contains("form-collapse")) return;
+      var opening = wrap.hidden;
+      wrap.hidden = !opening;
+      btn.textContent = opening ? "收起表单" : (btn.getAttribute("data-label") || "展开表单");
+      if (opening) {
+        setTimeout(function () {
+          wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      }
+    });
+  });
 })();
