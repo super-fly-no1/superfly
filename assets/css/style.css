@@ -1111,6 +1111,23 @@ strong { color: var(--primary); font-weight: 600; }
   margin-bottom: 18px;
 }
 .member-price em { font-style: normal; font-size: 0.45em; color: var(--text-muted); -webkit-text-fill-color: var(--text-muted); }
+.member-fee {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.member-offline {
+  display: block;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  border: 1px dashed rgba(148, 184, 255, 0.4);
+  border-radius: 9px;
+  text-align: center;
+  letter-spacing: 1px;
+}
 .member-card ul { flex: 1; text-align: left; margin-bottom: 22px; }
 .member-card ul li {
   position: relative;

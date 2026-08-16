@@ -238,27 +238,7 @@
   // 在线留言
   bindForm("msgForm", "uvd_messages");
 
-  /* ---------- 8. 会员卡片「开通」按钮联动注册表单 ---------- */
-  var planButtons = document.querySelectorAll("[data-plan]");
-  planButtons.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      // 平滑滚动到会员注册表单（按钮本身在会员区块内）
-      e.preventDefault();
-      var plan = btn.getAttribute("data-plan");
-      var radios = document.querySelectorAll('input[name="plan"]');
-      radios.forEach(function (r) {
-        if (r.value === plan) r.checked = true;
-      });
-      var card = document.querySelector("#membership .form-card");
-      if (card) {
-        card.scrollIntoView({ behavior: "smooth", block: "center" });
-        card.style.boxShadow = "0 0 0 3px rgba(34,211,238,0.35)";
-        setTimeout(function () { card.style.boxShadow = ""; }, 1600);
-      }
-    });
-  });
-
-  /* ---------- 9. 同意勾选才可提交 ---------- */
+  /* ---------- 8. 同意勾选才可提交 ---------- */
   document.querySelectorAll("form .consent input[type='checkbox']").forEach(function (cb) {
     var form = cb.closest("form");
     var submitBtn = form ? form.querySelector("button[type='submit']") : null;
