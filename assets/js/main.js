@@ -218,19 +218,7 @@
     }
   }
 
-  /* 订单编号生成 */
-  function genOrderId() {
-    var d = new Date();
-    var y = d.getFullYear();
-    var n = Math.floor(1000 + Math.random() * 9000);
-    return "UVD-" + y + "-" + n;
-  }
-
-  // 定制申请
-  bindForm("orderForm", "uvd_orders", function (record, form) {
-    var noEl = form.querySelector("#orderNo");
-    if (noEl) noEl.textContent = genOrderId();
-  });
+  // 申请定制：已改用金数据表单（新页面跳转填写），无需本地表单逻辑
 
   // 会员注册
   bindForm("memberForm", "uvd_members");
